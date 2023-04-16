@@ -1,9 +1,18 @@
 .PHONY: all build run push clean
 
+TAG = "0.2.0-debian"
+IMAGE_NAME = "dev:${TAG}"
+SHELL := /bin/bash
+
+
 all: build run push
 
 build:
-	bash docker_build.sh
+	echo "IMAGE_NAME: ${IMAGE_NAME}"
+	docker build \
+	--tag "${IMAGE_NAME}" \
+		--squash \
+		.
 
 run:
 	bash docker_run.sh
